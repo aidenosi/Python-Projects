@@ -1,20 +1,22 @@
-pentNums = []
-PSD = false
+import math
 
 
-def pentagonNums(n):
-    return n*(3*n-1)/2
+def testPentNum(x):
+    n = (math.sqrt(24*x + 1) + 1)/6
+    return(n == int(n))
 
 
 d = 0
+x = 1
+found = False
+while(not found):
+    k = x*(3*x - 1)/2
+    x += 1
+    for y in range(1, x):
+        j = y*(3*y - 1)/2
+        if(testPentNum(k + j) & testPentNum(k - j)):
+            d = k - j
+            found = True
+            break
 
-for x in range(1, 100):
-    pentNums[x] = pentagonNums(x)
-    if(x > 1):
-        for y in range(1, x):
-            if (pentNums[x] + pentNums[y]) in pentNums:
-                if(pentNums[x] - pentNums[y]) in pentNums:
-                    d = pentNums[x] - pentNums[y]
-                    print(d)
-
-print("End of program. d = " + d)
+print("End of program. d =", d)
